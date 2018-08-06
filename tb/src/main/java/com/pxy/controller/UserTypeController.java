@@ -16,7 +16,7 @@ import com.pxy.service.UserTypeService;
 @Controller
 @RequestMapping("/usertype")
 @SessionAttributes({ "typeList"})
-public class UserTypeController {
+public class UserTypeController {  
 	@Autowired
 	private UserTypeService userTypeService;
 
@@ -29,6 +29,15 @@ public class UserTypeController {
 	}
 
 	@RequestMapping(value = "/get2")
+	public ModelAndView get2(Map<String,Object> session) {
+		ModelAndView model = new ModelAndView("usertype/list");
+		List<UserType> list = userTypeService.getUserType();
+		session.put("typeList", list);
+		
+		return model;
+	}
+
+	@RequestMapping(value = "/get3")
 	public ModelAndView get2(Map<String,Object> session) {
 		ModelAndView model = new ModelAndView("usertype/list");
 		List<UserType> list = userTypeService.getUserType();
